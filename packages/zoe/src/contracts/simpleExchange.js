@@ -131,9 +131,7 @@ export const makeContract = harden(zcf => {
   const makeExchangeInvite = () =>
     inviteAnOffer({
       offerHook: exchangeOfferHook,
-      customProperties: {
-        inviteDesc: 'exchange',
-      },
+      inviteDesc: 'exchange',
     });
 
   return harden({

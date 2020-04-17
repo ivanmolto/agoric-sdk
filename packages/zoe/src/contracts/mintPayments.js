@@ -31,9 +31,10 @@ export const makeContract = harden(zcf => {
 
       // We need to make an invite and store the offerHandle of that
       // invite for future use.
-      const contractSelfInvite = zcf.makeInvitation(
-        offerHandle => (tempContractHandle = offerHandle),
-      );
+      const contractSelfInvite = zcf.makeInvitation({
+        offerHook: offerHandle => (tempContractHandle = offerHandle),
+        inviteDesc: 'internal temporary invite',
+      });
       // To escrow the tokens, we must get the Zoe Service facet and
       // make an offer
       zcf
@@ -68,7 +69,11 @@ export const makeContract = harden(zcf => {
     };
 
     // A function for making invites to this contract
-    const makeInvite = () => zcf.makeInvitation(offerHook);
+    const makeInvite = () =>
+      zcf.makeInvitation({
+        offerHook,
+        inviteDesc: 'mint a payment',
+      });
 
     return harden({
       // return an invite to the creator of the contract instance
