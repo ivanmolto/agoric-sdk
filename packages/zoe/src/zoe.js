@@ -365,7 +365,10 @@ const makeZoe = (additionalEndowments = {}) => {
     // other information defined by the smart contract. Note that the
     // smart contract cannot override or change the values of `handle`
     // and `instanceHandle`.
-    const makeInvitation = (offerHook, customProperties = harden({})) => {
+    const makeInvitation = (
+      offerHook = harden(() => {}),
+      customProperties = harden({}),
+    ) => {
       const inviteHandle = harden({});
       const inviteAmount = inviteAmountMath.make(
         harden([
