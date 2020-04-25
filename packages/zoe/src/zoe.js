@@ -434,7 +434,11 @@ const makeZoe = (additionalEndowments = {}) => {
         customProperties = harden({}),
       }) => {
         assert.typeof(
-          inviteDesc,
+          // TODO Once we're past the transition and all
+          // contracts have been upgraded to use inviteDesc
+          // directly, rather than as a part of customProperties,
+          // the next line can simplify to "inviteDesc,"
+          inviteDesc || customProperties.inviteDesc,
           'string',
           details`expected an inviteDesc string`,
         );
